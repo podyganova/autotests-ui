@@ -34,8 +34,11 @@ def initialize_browser_state(playwright: Playwright) -> Page:
     yield browser.new_page()
     browser.close()
 
+
 # Открыть новую страницу браузера, используя сохраненное состояние
 @pytest.fixture(scope='function')
 def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
-    browser = initialize_browser_state.context.browser.new_context(storage_state="browser-state.json")
-    yield browser.new_page()
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context(storage_state="browser-state.json")
+    yield context.new_page()
+    browser.close()
