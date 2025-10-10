@@ -8,6 +8,6 @@ class DashboardPage(BasePage):
         self.dashboard_title = page.get_by_test_id('dashboard-toolbar-title-text')
 
     # Метод для проверки отображения алерта с ошибкой
-    def check_visible_dashboard_title_alert(self):
+    def check_visible_dashboard_title(self):
         expect(self.dashboard_title).to_be_visible()
         expect(self.dashboard_title).to_have_text("Dashboard")
