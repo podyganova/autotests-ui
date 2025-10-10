@@ -10,11 +10,15 @@ def test_empty_courses_list(courses_list_page: CoursesListPage):  # Создае
     # Переходим на страницу Courses
     courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
 
-    # Проверяем, что на странице "Courses" отображается заголовок "Courses"
-    courses_list_page.check_visible_courses_title()
+    # Добавили проверку компонентов Navbar и Sidebar на странице Courses
+    courses_list_page.sidebar.check_visible()
+    courses_list_page.navbar.check_visible("username")
 
-    # Проверяем, что на странице "Courses" отображается текст блока "There is no results"
+    # Проверяем, что на странице "Courses" отображается
+    courses_list_page.check_visible_courses_title()
+    courses_list_page.check_visible_create_course_button()
     courses_list_page.check_visible_empty_view()
+
 
 @pytest.mark.courses
 @pytest.mark.regression
