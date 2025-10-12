@@ -7,6 +7,8 @@ from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
+from tools.routes import AppRoute
+from config import settings
 
 
 @pytest.mark.courses
@@ -24,11 +26,11 @@ class TestCourses:
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):  # Создаем тестовую функцию
 
         # Переходим на страницу Courses
-        courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
+        courses_list_page.visit(AppRoute.COURSES)
 
         # Добавили проверку компонентов Navbar и Sidebar на странице Courses
         courses_list_page.sidebar.check_visible()
-        courses_list_page.navbar.check_visible("username")
+        courses_list_page.navbar.check_visible(settings.test_user.username)
 
         # Проверяем, что на странице "Courses" отображается
         courses_list_page.toolbar_view.check_visible()
@@ -39,9 +41,9 @@ class TestCourses:
     def test_create_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
 
         # Переходим на страницу создания Courses
-        courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
+        courses_list_page.visit(AppRoute.COURSES_CREATE)
 
-        create_course_page.navbar.check_visible("username")
+        create_course_page.navbar.check_visible(settings.test_user.username)
         create_course_page.create_course_toolbar_view_component.check_visible(is_create_course_disabled=True)
         create_course_page.create_course_form_component.check_visible(
             title='', description='', estimated_time='', max_score='0', min_score='0')
@@ -50,7 +52,7 @@ class TestCourses:
 
         # Создание Course
         create_course_page.check_visible_exercises_empty_view()
-        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
         create_course_page.create_course_form_component.fill_create_course_form(
             title='Playwright', description='Playwright', estimated_time='2 weeks', max_score='100', min_score='10')
@@ -65,11 +67,11 @@ class TestCourses:
     @allure.severity(Severity.CRITICAL)
     def test_edit_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
         # Переходим на страницу создания Courses
-        courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
+        courses_list_page.visit(AppRoute.COURSES_CREATE)
 
         # Создание Course
         create_course_page.check_visible_exercises_empty_view()
-        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
         create_course_page.create_course_form_component.fill_create_course_form(
             title='Playwright', description='Playwright', estimated_time='2 weeks', max_score='100', min_score='10')
