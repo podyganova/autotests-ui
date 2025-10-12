@@ -1,4 +1,5 @@
-from playwright.sync_api import Page  # Импортируем класс Page
+import allure
+from playwright.sync_api import Page
 
 
 class BasePage:
@@ -7,7 +8,9 @@ class BasePage:
         self.page = page  # Присваиваем объект page атрибуту класса
 
     def visit(self, url: str):  # Метод для открытия ссылок
-        self.page.goto(url, wait_until='networkidle')
+        with allure.step(f'Opening the url "{url}"'):
+            self.page.goto(url, wait_until='networkidle')
 
-    def reload(self):  # Метод для перезагрузки страницы
-        self.page.reload(wait_until='domcontentloaded')
+    def reload(self):
+        with allure.step(f'Reloading page with url "{self.page.url}"'):
+            self.page.reload(wait_until='domcontentloaded')

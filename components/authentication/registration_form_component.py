@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 from components.base_component import BaseComponent
 from elements.button import Button
@@ -13,12 +14,13 @@ class RegistrationFormComponent(BaseComponent):
         self.password_input = Input(page, 'registration-form-password-input', 'Password')
         self.registration_button = Button(page, 'registration-page-registration-button', 'Registration')
 
+    @allure.step("Check visible registration form")
     def check_visible(self):
         self.email_input.check_visible()
         self.username_input.check_visible()
         self.password_input.check_visible()
 
-    # Метод для заполнения формы регистрации
+    @allure.step("Fill registration form")
     def fill_registration_form(self, email: str, username: str, password: str):
         self.email_input.fill(email)
         self.email_input.check_have_value(email)  # Проверяем, что email введен корректно

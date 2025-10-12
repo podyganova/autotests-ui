@@ -1,5 +1,5 @@
+import allure
 from playwright.sync_api import Page
-
 from components.base_component import BaseComponent
 from elements.button import Button
 from elements.link import Link
@@ -20,12 +20,13 @@ class LoginFormComponent(BaseComponent):
             page, 'login-page-wrong-email-or-password-alert', 'Wrong email or password'
         )
 
+    @allure.step("Check visible login form")
     def check_visible(self):
         self.email_input.check_visible()
         self.password_input.check_visible()
         self.login_button.check_visible()
 
-    # Метод для заполнения формы авторизации
+    @allure.step("Fill login form")
     def fill_login_form(self, email: str, password: str):
         self.email_input.fill(email)
         self.email_input.check_have_value(email) # Проверяем, что email введен корректно
