@@ -1,0 +1,26 @@
+# pycharm
+.idea
+
+# python
+.venv
+venv
+env
+__pycache__
+
+# allure
+allure-results
+allure-report
+
+# testing artifacts
+*.html
+*.json
+videos
+tracing
+
+# test
+tests/test_fixtures.py
+tests/test_pytest.py
+tests/test_reruns.py
+pydantic_product.py
+pydantic_user.py
+/venv/
