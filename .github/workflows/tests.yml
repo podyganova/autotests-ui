@@ -40,11 +40,11 @@ jobs:
 
       # 5. Шаг для загрузки результатов в артефакт
       - name: Upload Allure results
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: allure-results
-            path: allure-results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
 
 
   publish-report:
@@ -53,10 +53,10 @@ jobs:
     steps:
       # 1. Шаг, который будет клонировать ваш репозиторий на машину GitHub Actions
       - name: Check out repository
-          uses: actions/checkout@v4
-          with:
-            ref: gh-pages
-            path: gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       # 2. Шаг для загрузки результатов из артефакта
       - name: Download Allure results
