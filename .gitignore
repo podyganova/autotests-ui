@@ -3,8 +3,8 @@
 
 # python
 .venv
-venv
-env
+/venv/
+/env/
 __pycache__
 
 # allure
@@ -23,4 +23,3 @@ tests/test_pytest.py
 tests/test_reruns.py
 pydantic_product.py
 pydantic_user.py
-/venv/
