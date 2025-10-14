@@ -8,3 +8,4 @@ pytest-playwright==0.7.1
 pytest-rerunfailures==16.0.1
 pytest-xdist==3.8.0
 typing_extensions==4.15.0
+ui-coverage-tool==0.31.0
